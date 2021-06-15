@@ -4,8 +4,8 @@
         <script>
           !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.13.1";
           analytics.load("uUC2dDHmdMbfcd4LMjSa7fhMySFEA600");
-          analytics.page();
           }}();
+          //Enter the Segment JS SDK snippet here 
         </script>
     </header>
 
@@ -68,38 +68,35 @@
                 
         function setUserID() {
             var user = document.getElementById("UserID").value; //Gets the Full Name inputted by the user in the "user" variable
-            var anon = analytics.user().anonymousId(); //Segment has an anonymousID which "anon" variable captures
+            var age = document.getElementById("age").value; //The age variable captures the age that the user inputted in the website (if any)
+            var food = document.getElementById("favfood").value; //The food variable captures the favorite food of the user if they inputted one into the website
             
-            document.getElementById("currentUser").innerHTML = user + " is logged in!";
+            document.getElementById("currentUser").innerHTML = user + " is logged in!"; 
             
             if(user != "") {
                 analytics.identify(user, {
-                    anonymousId: analytics.user().anonymousId(),
-                    age: document.getElementById("age").value,
-                    favFood: document.getElementById("favfood").value
+                    age: age,
+                    favFood: food
                 });
                 //Add the analytics.identify function here where the variable "user" should be the User ID
             }
             else if(user == "") {
-                
                 analytics.identify(null, {
-                    age: document.getElementById("age").value,
-                    favFood: document.getElementById("favfood").value
+                    age: age,
+                    favFood: food
                 });
                 //Add the analytics.identify function here where "null" will be the User ID (anonymous)
             }
             
-            analytics.track('Logged In', {
-                plan: 'Enterprise'
-            });
+            analytics.track('Logged In');
             //Log an event when the Log In button is clicked
         }
         
         function logevent() {
         	document.getElementById("event").innerHTML = document.getElementById("UserID").value +  " logged event 1!";
 
-            var color = document.getElementById("color").value;
-            var day = document.getElementById("day").value;
+            var color = document.getElementById("color").value; //The color variable captures the color shirt in the website if any
+            var day = document.getElementById("day").value; //The day variable captures the current day of the week if one is inputted in the website.
 
             //Log an event using the analytics.track function along with the event properties color and day
              analytics.track("Log Event 1", {
@@ -115,8 +112,8 @@
         function logevent2() {
 			document.getElementById("event").innerHTML = document.getElementById("UserID").value +  " logged event 2!";
 
-            var color = document.getElementById("color").value;
-            var day = document.getElementById("day").value;
+            var color = document.getElementById("color").value; //The color variable captures the color shirt in the website if any
+            var day = document.getElementById("day").value; //The day variable captures the current day of the week if one is inputted in the website.
 
             //Log an event using the analytics.track function along with the event properties color and day 
             analytics.track("Log Event 2", {
@@ -132,8 +129,8 @@
         function logevent3() {
             document.getElementById("event").innerHTML = document.getElementById("UserID").value +  " logged event 3!";
 
-            var color = document.getElementById("color").value;
-            var day = document.getElementById("day").value;
+            var color = document.getElementById("color").value; //The color variable captures the color shirt in the website if any
+            var day = document.getElementById("day").value; //The day variable captures the current day of the week if one is inputted in the website.
 
             //Log an event using the analytics.track function along with the event properties color and day
             analytics.track("Log Event 3", {
@@ -149,9 +146,9 @@
         function item() {
 
         document.getElementById("purchase").innerHTML = "Thank you for purchasing " + document.getElementById("items").value + "!";
-        var name = document.getElementById("items").value; //The name of the item
+        var name = document.getElementById("items").value; //The name variable capture the name of the item chosen in the dropdown menu
         var cost = 1; //This is the price of the item depending which one is chosen. For example if in the website Socks is chosen then cost would equal 8.99.
-        var numOfItems = document.getElementById("quantity").value; //The quantity of the item
+        var numOfItems = document.getElementById("quantity").value; //The quantity of the item chosen in the dropdown menu
 
         if(name == "Playstation 5") {
             cost = 499.99
