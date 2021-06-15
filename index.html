@@ -88,8 +88,13 @@
                 //Add the analytics.identify function here where "null" will be the User ID (anonymous)
             }
             
-            analytics.track('Logged In');
+            analytics.track('Logged In'
             //Log an event when the Log In button is clicked
+            ,{}, {
+               "Amplitude": {
+                   "session_id": now
+               }
+            });
         }
         
         function logevent() {
